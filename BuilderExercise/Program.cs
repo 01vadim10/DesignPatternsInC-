@@ -1,20 +1,45 @@
 ﻿using System;
-using System.Runtime.Remoting;
+using System.Collections.Generic;
 
 namespace BuilderExercise
 {
     public class CodeBuilder
     {
-        public ObjectHandle type;
+        public CustomClass newClass;
 
         public CodeBuilder(string className)
         {
-            type = Activator.CreateInstance(null, className);
+            newClass = new CustomClass(className);
         }
 
         public CodeBuilder AddField(string name, string type)
         {
+            var newField = (name, type);
+            newClass.Fields.Add(newField);
 
+            return this;
+        }
+    }
+
+    public class CustomClass
+    {
+        public string ClassName { get; }
+        public List<(string Name, string Type)> Fields { get; set; } = new List<(string Name, string Type)>();
+        
+        public CustomClass()
+        {
+            
+        }
+
+        public CustomClass(string className)
+        {
+            ClassName = className;
+        }
+
+        public override string ToString()
+        {
+
+            return base.ToString();
         }
     }
 
